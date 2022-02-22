@@ -12,7 +12,6 @@ def index():
 current_path = os.getcwd()
 app.config["AUDIO_UPLOADS"] = current_path + "\\main\\static\\audio\\upload\\"
 app.config["ALLOWED_AUDIO_EXTENSIONS"] = ["WAV"]
-app.config["MAX_FILESIZE"] = 0.5 * 1024
 
 def allowed_audio(filename):
     if not "." in filename:
@@ -30,15 +29,21 @@ def upload_file():
         if request.files:
             audio = request.files["audio"]
             if audio.filename == "":
-                print ("Audio must have a filename")
+                global peringatan
+                peringatan = 'File Harus Diisi'
                 return redirect(request.url)
             if not allowed_audio(audio.filename):
-                print("harus wav brou")
+                peringatan = 'File Harus Menggunakan Format *.wav'
                 return redirect(request.url)
             else:
                 filename = secure_filename(audio.filename)
                 audio.save(os.path.join(app.config["AUDIO_UPLOADS"], filename))
                 global audio_text
                 audio_text = takecommand(app.config["AUDIO_UPLOADS"] + audio.filename) # Untuk convert audio ke text
-            return redirect(request.url)
-    return render_template("index.html", name=audio_text)
+            return redirect('/hasil')
+    return render_template("index.html", name=peringatan)
+
+
+@app.route('/hasil')
+def hasil():
+    return render_template('hasil.html', translate_text = audio_text)

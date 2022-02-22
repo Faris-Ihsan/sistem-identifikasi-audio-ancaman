@@ -1,49 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../static/css/style.css">
-    <title>Sistem Identifikasi Audio Ancaman</title>
-</head>
-<body>
-    <nav>
-        <div class="logo">
-            <h4>Sistem Identifikasi Audio Ancaman</h4>
+{% extends 'base/base.html' %}
+
+{% block content %}
+<div class="container">
+    <header class="header">
+        <div class="hero">
+            <h3 class="heading">Masukan File Audio Disini</h3>
+            <hr>
+            <br>
+            <form action="/uploader" method="post" enctype="multipart/form-data">
+                <p class="sub-heading">
+                    <input type="file" name="audio" id="audio" accept="audio/*">
+                </p>
+                <p style="font-size: small; color: red; font-weight: bold;">{{ name }}</p>
+                <br>
+                <p><input type="submit"></p>
+            </form>
         </div>
-        <ul>
-            <li><a href="#">Getting Started</a></li>
-            <li><a href="#">About</a></li>
-        </ul>
-        <div class="menu-toggle">
-            <input type="checkbox"/>
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-    </nav>
+    </header>
+</div>
 
-
-    <div class="container">
-        <header class="header">
-            <div class="hero">
-                <h3 class="heading">Masukan File Audio Disini</h3>
-                <p>{{ name }}</p>
-                <form action="/uploader" method="post" enctype="multipart/form-data">
-                    <p class="sub-heading">
-                        <input type="file" name="audio" id="audio" accept="audio/*">
-                    </p>
-                    <p><input type="submit"></p>
-                </form>
-            </div>
-        </header>
-    </div>
-
-
-    <script src="../static/js/hamburger.js"></script>
-</body>
-</html>
+{% endblock %}
