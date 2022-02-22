@@ -1,8 +1,11 @@
+from unicodedata import name
 from main import app
 import os
 from flask import request, redirect, render_template
 from werkzeug.utils import secure_filename
 from main.recognition import takecommand
+from main.cnn_predict import prediksi
+
 audio_text = ''
 
 @app.route('/')
@@ -40,10 +43,18 @@ def upload_file():
                 audio.save(os.path.join(app.config["AUDIO_UPLOADS"], filename))
                 global audio_text
                 audio_text = takecommand(app.config["AUDIO_UPLOADS"] + audio.filename) # Untuk convert audio ke text
+                global hasil_prediksi
+                hasil_prediksi = prediksi(audio_text)
             return redirect('/hasil')
     return render_template("index.html", name=peringatan)
 
 
 @app.route('/hasil')
 def hasil():
-    return render_template('hasil.html', translate_text = audio_text)
+    print(hasil_prediksi)
+    return render_template('hasil.html', translate_text = audio_text, hasil_identifikasi = hasil_prediksi)
+
+
+@app.route('/about')
+def about():
+    return render_template('about.html')

@@ -14,7 +14,7 @@ https://stackoverflow.com/questions/59910151/keras-printing-out-the-predicted-cl
 model_path = os.getcwd() + '\\main\\cnn_models\\model.h5'
 dataset_path = os.getcwd() + '\\main\\cnn_models\\df_train.csv'
 
-kata = ['saya akan bunuh kamu sampai kamu mati di penjara']
+#kata = ['saya akan bunuh kamu sampai kamu mati di penjara']
 
 def tokenize_df_train():
     d = pd.read_csv(dataset_path)
