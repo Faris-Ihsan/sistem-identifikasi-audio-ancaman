@@ -32,9 +32,10 @@
         <header class="header">
             <div class="hero">
                 <h3 class="heading">Masukan File Audio Disini</h3>
+                <h1>{{ name }}</h1>
                 <form action="/uploader" method="post" enctype="multipart/form-data">
                     <p class="sub-heading">
-                        <input type="file" name="file" accept="audio/*">
+                        <input type="file" name="audio" id="audio" accept="audio/*">
                     </p>
                     <p><input type="submit"></p>
                 </form>
