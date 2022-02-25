@@ -45,4 +45,8 @@ def prediksi(kata):
     MaxPosition=np.argmax(prediksi)
     classes = ['Bukan Ancaman', 'Ancaman'] 
     prediction_label=classes[MaxPosition]
-    return prediction_label
+    persentase = np.max(prediksi)
+    persentase = persentase * 100
+    print(prediction_label, persentase)
+    return prediction_label, int(persentase)
+

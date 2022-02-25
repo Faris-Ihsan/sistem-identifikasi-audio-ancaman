@@ -44,7 +44,7 @@ def upload_file():
                 global audio_text
                 audio_text = takecommand(app.config["AUDIO_UPLOADS"] + audio.filename) # Untuk convert audio ke text
                 global hasil_prediksi
-                hasil_prediksi = prediksi(audio_text)
+                hasil_prediksi = prediksi([audio_text])
             return redirect('/hasil')
     return render_template("index.html", name=peringatan)
 
